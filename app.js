@@ -6,8 +6,10 @@ const app = express()
 require('dotenv').config()
 
 mongoose.Promise = global.Promise
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+if (process.env.NODE_ENV !== 'test') {
+  const uri = process.env.ATLAS_URI;
+  mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+}
 
 app.use(bodyParser.json())
 routes(app)
