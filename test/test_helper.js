@@ -5,7 +5,7 @@ before(done => {
 
   const uri = process.env.ATLAS_URI;
   // test server
-  mongoose.connect(uri)
+  mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
   mongoose.connection
     .once('open', () => done())
     .on('error', err => {
